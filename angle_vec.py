@@ -4,7 +4,7 @@ from random import random
 from sys import float_info
 
 DIGITS = 3
-ACCURACY = 0.0001
+ACCURACY = 0.001
 UP_MAX = 30
 
 class AngleInfo(object):
@@ -52,7 +52,10 @@ class AngleInfo(object):
         return (self.spin, self.up)
 
     def getVectors(self):
-        return (np.sin(np.radians(self.spin)),
+        if self.spin is None or self.up is None:
+            return (None, None, None)
+        else:
+            return (np.sin(np.radians(self.spin)),
                 np.cos(np.radians(self.spin)),
                 np.sin(np.radians(self.up)) / np.sin(np.radians(UP_MAX)))
 
